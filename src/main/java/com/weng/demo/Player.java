@@ -1,6 +1,8 @@
 package com.weng.demo;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -9,7 +11,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Player {
+
     // 玩家ID
     public String id;
     // 玩家暱稱
