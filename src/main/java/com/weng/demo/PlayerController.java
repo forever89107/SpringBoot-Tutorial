@@ -41,7 +41,7 @@ public class PlayerController {
 
     // 取得全部玩家資訊
     //    @GetMapping("/player")
-    //    public List<Player> getAllPlayer(@RequestBody PlayerQuery playerQuery) {
+    //    public List<Player> getAllPlayer() {
     //
     //    //      //取得全部玩家邏輯...回傳
     //    }
