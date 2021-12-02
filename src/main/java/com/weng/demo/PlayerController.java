@@ -116,8 +116,8 @@ public class PlayerController {
         //遍歷並刪除id符合的玩家
         boolean delete = playerDB.removeIf(p -> p.getId().equals(id));
         if (delete) {
-            Response response = new Response(HttpStatus.OK.value(), "刪除成功");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            Response response = new Response(HttpStatus.NO_CONTENT.value(), "刪除成功");
+            return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
         } else {
             Response response = new Response(HttpStatus.NOT_FOUND.value(), "無此Id： " + id);
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
