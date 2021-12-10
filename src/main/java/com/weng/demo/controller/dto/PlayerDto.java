@@ -1,4 +1,4 @@
-package com.weng.demo;
+package com.weng.demo.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Player {
+public class PlayerDto {
 
     // 玩家ID
     public String id;

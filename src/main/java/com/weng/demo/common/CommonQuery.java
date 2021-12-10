@@ -1,4 +1,4 @@
-package com.weng.demo;
+package com.weng.demo.common;
 
 import lombok.Getter;
 import lombok.Setter;

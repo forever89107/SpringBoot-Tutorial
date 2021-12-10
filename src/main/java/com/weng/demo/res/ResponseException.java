@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ResponseException {
+public class ResponseException extends RuntimeException{
     private int errorCode;
     private String message;
 
