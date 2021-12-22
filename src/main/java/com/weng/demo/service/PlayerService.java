@@ -2,7 +2,9 @@ package com.weng.demo.service;
 
 import com.weng.demo.common.CommonQuery;
 import com.weng.demo.controller.dto.PlayerDto;
+import com.weng.demo.dao.PlayerMapper;
 import com.weng.demo.res.ResponseException;
+import com.weng.demo.service.po.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class PlayerService {
     @Autowired
     private PlayerDAO playerDAO;
 
+    @Autowired
+    private PlayerMapper playerMapper;
+
     /**
      * 查詢列表
      */
@@ -30,8 +35,10 @@ public class PlayerService {
      * 查詢
      */
     public PlayerDto getPlayerInfo(String id) {
-        return playerDAO.select(id).orElseThrow(() ->
-                new ResponseException(HttpStatus.NOT_FOUND.value(), "查無此人"));
+        Player player = playerMapper.findById(id);
+        return poToDto(player);
+//        return playerDAO.select(id).orElseThrow(() ->
+//                new ResponseException(HttpStatus.NOT_FOUND.value(), "查無此人"));
     }
 
     /**
@@ -67,5 +74,17 @@ public class PlayerService {
     public Boolean deletePlayer(String id) {
         PlayerDto player = getPlayerInfo(id);
         return playerDAO.delete(player.getId());
+    }
+
+    /**
+     * PO 轉 DTO
+     */
+    private PlayerDto poToDto(Player player){
+        PlayerDto dto = new PlayerDto();
+        dto.setId(player.getId());
+        dto.setJob(player.getJob());
+        dto.setLevel(player.getLevel());
+        dto.setPlayerName(player.getPlayerName());
+        return dto;
     }
 }
