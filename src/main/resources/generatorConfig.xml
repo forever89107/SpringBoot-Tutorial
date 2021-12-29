@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- id：Context示例的唯一ID，用於輸出錯誤資訊時候作為唯一標記 -->
+    <!-- targetRuntime： 用於執行程式碼生成模式-->
+    <context id="context" targetRuntime="MyBatis3">
+        <!-- 新增分頁插件 -->
+<!--        <plugin type="com.xxg.mybatis.plugins.MySQLLimitPlugin" />-->
+        <!-- 新增實例序列號 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <!-- commentGenerator 標籤是可選的，用於控制生成的實體的註釋內容-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="false"/>
+        </commentGenerator>
+
+        <!-- 資料庫連線設定 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/demo" userId="root"
+                        password="123456"/>
+        <!-- 不強制把所有的數字型別轉化為BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetPackage	生成的實體類的包名；targetProject	生成的實體類檔案相對於專案（根目錄）的位置-->
+        <javaModelGenerator
+                targetPackage="com.weng.demo.dao.generate.po"
+                targetProject="src/main/java">
+            <!-- 是否允許通過Schema生成子包 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- Setter方法是否對字串型別進行一次trim操作 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- MyBatis Mapper產生的位置 -->
+        <sqlMapGenerator targetPackage="com.weng.demo.dao.generate.mapper"
+                         targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- ANNOTATEDMAPPER：Mapper介面生成的時候依賴於註解和SqlProviders（也就是純註解實現），不會生成XML對映檔案。
+             XMLMAPPER：Mapper介面生成介面方法，對應的實現程式碼生成在XML對映檔案中（也就是純對映檔案實現）。 -->
+        <javaClientGenerator
+                targetPackage="com.weng.demo.dao.generate.dao"
+                targetProject="src/main/java" type="ANNOTATEDMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 要生成的資料表 -->
+        <table schema="demo" tableName="player"
+               domainObjectName="PlayerDom" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true">
+            <!--true 会使用database中實際的字段名字作為實體類生成的屬性名稱。
+                false 為默認直。會將資料庫中的欄位名稱轉為Camel Case風格作为生成的實體類屬性名稱。-->
+            <property name="useActualColumnNames" value="false"/>
+            <columnRenamingRule searchString="^(.){0}(u_|f_|s_|d_|ft_)" replaceString=""/>
+            <columnOverride column="val" jdbcType="VARCHAR" />
+        </table>
+
+    </context>
+</generatorConfiguration>
