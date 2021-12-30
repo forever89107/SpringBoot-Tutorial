@@ -56,7 +56,7 @@ public class PlayerController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<?> editPlayer(@PathVariable(name = "id") String id, @RequestBody PlayerDto request) {
-        PlayerDto playerDto = playerService.editPlayer(id, request);
+        PlayerDto playerDto = playerService.editPlayer(request);
         Response response = new Response(HttpStatus.OK.value(), "修改成功", Collections.singletonList(playerDto));
 
         return new ResponseEntity<>(response, HttpStatus.OK);
